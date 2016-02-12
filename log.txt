@@ -1,0 +1,11 @@
+commit 2e113cdaf248803cb45af3186455e63df8d1368f
+Author: Alexej <katomachin@gmail.com>
+Date:   Fri Feb 12 17:14:48 2016 +0300
+
+    Add status.txt
+
+commit eba0127947023b941d31f33d0db15295b326a200
+Author: Alexej <katomachin@gmail.com>
+Date:   Fri Feb 12 17:10:37 2016 +0300
+
+    Add .gitignore
