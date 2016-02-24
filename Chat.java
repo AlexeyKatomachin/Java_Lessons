@@ -118,7 +118,7 @@ class Mail {
     void save() throws IOException {
         personArray.add(personObject);
         try (FileWriter file = new FileWriter(fileName)) {
-            file.write(personArray.toJSONString());
+            file.write(personArray.toString());
         }
     }
 
