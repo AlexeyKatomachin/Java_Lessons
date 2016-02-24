@@ -1,28 +1,25 @@
-/**
- * Created by User on 16.02.2016.
- * <p>
- * Created by User on 13.02.2016.
- */
 
 
-import com.google.gson.Gson;
 
+import java.io.FileWriter;
 import javax.json.*;
-import java.io.IOException;
-import java.io.StringReader;
-import java.io.StringWriter;
-import javax.json.Json;
-import javax.json.JsonObject;
-import javax.json.JsonObjectBuilder;
-import javax.json.JsonWriter;
+import java.io.*;
+import java.util.Objects;
 
 
 public class Chat_A {
-    public static void main() throws IOException {
+    public void main() throws IOException {
         Mail m = new Mail();
-        String id, name, text, data;
         int sch = 1;
+        chousTask(m, sch);
 
+    }
+
+    private void chousTask(Mail m, int sch) throws IOException {
+        String id;
+        String name;
+        String text;
+        String data;
         System.out.println("Выберите действие:");
         System.out.println("1.Загрузка сообщения по id.");
         System.out.println("2.Сохранение сообщения. ");
@@ -88,85 +85,110 @@ public class Chat_A {
                     break cs;
             }
         }
-
     }
 }
 
 class Mail {
-    private String id, name, text, data;
-    private JsonObject personObject, personJSONData;
-    private JsonReader reader = Json.createReader(new StringReader(personJSONData));
+    private JsonObject personObject;
+    private JsonReader reader;
     private JsonArray personArray;
-    private StringWriter stringWriter;
-    private Gson gson;
+    private String fileName = "config.cfg";
 
-        // Загрузка сообщения по id
-        void load(String id){
-        reader=Json.createReader(new StringReader(personJSONData));
-        JsonArray personArray=reader.readArray();
+    Mail() {
+
+    }
+
+    // Загрузка сообщения по id
+    void load(String id) {
+        reader = Json.createReader(new StringReader(fileName));
+        JsonArray personArray = reader.readArray();
         reader.close();
 
-        for(JsonValue jsonVal:personArray)
-        {
-        if(id==((JsonObject)personObj).getString("id"))
-        System.out.println(((JsonObject)personObj).getString("id")+" ; "
-        +((JsonObject)personObj).getString("Author")
-        +" ; "+((JsonObject)personObj).getString("timestamp")
-        +" ; "+((JsonObject)personObj).getString("massage"));
+        for (JsonValue jsonVal : personArray) {
+            if (Objects.equals(id, personObject.getString("id"))) {
+                System.out.println(personObject.getString("id") + " ; "
+                        + personObject.getString("Author")
+                        + " ; " + personObject.getString("timestamp")
+                        + " ; " + personObject.getString("massage"));
+            }
 
         }
-        }
-        void save()
-        {
-        stringWriter=new StringWriter();
-        JsonWriter writer=Json.createWriter(stringWriter);
-        writer.writeObject(personObject);
-        writer.close();
-        }
+    }
 
-        void read(){
-        reader=Json.createReader(new StringReader(personJSONData));
-        JsonArray personArray=reader.readArray();
+    void save() throws IOException {
+        personArray.add(personObject);
+        try (FileWriter file = new FileWriter(fileName)) {
+            file.write(personArray.toJSONString());
+        }
+    }
+
+    void read() {
+        reader = Json.createReader(new StringReader(fileName));
+        JsonArray personArray = reader.readArray();
         reader.close();
 
 
-        for(JsonValue jsonVal:personArray){
-        System.out.println(personObj.getValueType()+" - "
-        +((JsonObject)personObj).getString("name"));
+        for (JsonValue jsonVal : personArray) {
+            System.out.println("id" + personObject.getString("id") + " ; ");
+            System.out.println("Author" + personObject.getString("Author") + " ; ");
+            System.out.println("timestamp" + personObject.getString("timestamp") + " ; ");
+            System.out.println("massage" + personObject.getString("massage") + " ; ");
         }
-        }
+    }
 
 
-        void del(String id){
-        reader=Json.createReader(new StringReader(personJSONData));
-        JsonArray personArray=reader.readArray();
+    void del(String id) {
+        reader = Json.createReader(new StringReader(fileName));
+        JsonArray personArray = reader.readArray();
         reader.close();
 
-        for(JsonValue jsonVal:personArray)if(id==((JsonObject)personObj).getString("id"));
+        for (JsonValue jsonVal : personArray) if (id == personObject.getString("id")) ;
+
+    }
+
+
+    void seurch(String name) {
+        reader = Json.createReader(new StringReader(fileName));
+        JsonArray personArray = reader.readArray();
+        reader.close();
+
+        for (JsonValue jsonVal : personArray) {
+            if (name == personObject.getString("Author"))
+                System.out.println(personObject.getString("id") + " ; "
+                        + personObject.getString("Author")
+                        + " ; " + personObject.getString("timestamp")
+                        + " ; " + personObject.getString("massage"));
 
         }
+    }
 
 
-        void seurch(String name){
+    void seurch_txt(String text) {
+
+    }
+
+    void seurch_data(String data) {
+        reader = Json.createReader(new StringReader(fileName));
+        JsonArray personArray = reader.readArray();
+        reader.close();
+
+        for (JsonValue jsonVal : personArray) {
+            if (data == personObject.getString("timestamp"))
+                System.out.println(personObject.getString("id") + " ; "
+                        + personObject.getString("Author") + " ; "
+                        + personObject.getString("timestamp") + " ; "
+                        + personObject.getString("massage"));
 
         }
+    }
 
-
-        void seurch_txt(String text){
-
-        }
-
-        void seurch_data(String data){
-
-        }
-
-        // создание сообщения
-        void make_mail(String id,String name,String text,String data){
-        personObject=Json.createObjectBuilder()
-        .add("id",id)
-        .add("Author",name)
-        .add("timestamp",data)
-        .add("massage",text)
-        .build();
-        }
-        }
+    // создание сообщения
+    void make_mail(String id, String name, String text, String data) {
+        personObject = Json.createObjectBuilder()
+                .add("id", id)
+                .add("Author", name)
+                .add("timestamp", data)
+                .add("massage", text)
+                .build();
+    }
+}
