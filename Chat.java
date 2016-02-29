@@ -1,25 +1,29 @@
 
 
 
-import java.io.FileWriter;
 import javax.json.*;
-import java.io.*;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.StringReader;
 import java.util.Objects;
+import java.util.Scanner;
 
 
 public class Chat_A {
-    public void main() throws IOException {
+    public static void main(String[] args) throws IOException {
         Mail m = new Mail();
-        int sch = 1;
-        chousTask(m, sch);
+        Scanner in = new Scanner(System.in);
+
+        chousTask(m, in);
 
     }
 
-    private void chousTask(Mail m, int sch) throws IOException {
+    private static void chousTask(Mail m, Scanner in) throws IOException {
         String id;
         String name;
         String text;
         String data;
+        int sch;
         System.out.println("Выберите действие:");
         System.out.println("1.Загрузка сообщения по id.");
         System.out.println("2.Сохранение сообщения. ");
@@ -32,13 +36,20 @@ public class Chat_A {
         System.out.println("9.Добавление сообщения.");
         System.out.println("10.Выйти из чата :)");
 
+        sch = in.nextInt();
         cs:
-        while (sch > 0) {
-            sch = System.in.read();
+        while (true) {
+
+            if ((sch<1)||(sch>10))
+            {
+                System.out.println("Вы неправильно ввели команду. Попробуйте снова)");
+                sch = in.nextInt();
+            }
+
             switch (sch) {
                 case (1):
                     System.out.println("Введите id");
-                    id = String.valueOf(System.in.read());
+                    id = in.next();
                     m.load(id);
                     break;
                 case (2):
@@ -49,17 +60,17 @@ public class Chat_A {
                     break;
                 case (4):
                     System.out.println("Введите id");
-                    id = String.valueOf(System.in.read());
+                    id = in.next();
                     m.del(id);
                     break;
                 case (5):
                     System.out.println("Введите имя");
-                    name = String.valueOf(System.in.read());
+                    name = in.next();
                     m.seurch(name);
                     break;
                 case (6):
                     System.out.println("Введите слово");
-                    text = String.valueOf(System.in.read());
+                    text = in.next();
                     m.seurch_txt(text);
                     break;
                 case (7):
@@ -67,18 +78,18 @@ public class Chat_A {
                     break;
                 case (8):
                     System.out.println("Введите дату");
-                    data = String.valueOf(System.in.read());
+                    data = in.next();
                     m.seurch_data(data);
                     break;
                 case (9):
                     System.out.println("Введите id сообщения");
-                    id = String.valueOf(System.in.read());
+                    id = in.next();
                     System.out.println("Введите имя");
-                    name = String.valueOf(System.in.read());
+                    name = in.next();
                     System.out.println("Введите дату");
-                    data = String.valueOf(System.in.read());
+                    data = in.next();
                     System.out.println("Введите текст");
-                    text = String.valueOf(System.in.read());
+                    text = in.next();
                     m.make_mail(id, name, data, text);
                     break;
                 case (10):
