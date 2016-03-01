@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+    <head lang="en">
+    <meta charset="UTF-8">
+    <title>Список задач. JavaScript &amp; DOM.</title>
+    <link rel="stylesheet" href="css/normalize.css"/>
+    <link rel="stylesheet" href="css/todo.css"/>
+    <link rel="stylesheet" href="../../resources/css/fonts.css"/>
+    <link rel="stylesheet" href="css/responsive.css"/>
+    <script src="js/todo.js"></script>
+</head>
+<body onload="run();">
+
+    <div class="all">
+        <header class="header">
+            <div class="section-inner">
+                <h1 class="section-headline">Chat )</h1>
+            </div>
+        </header>
+        <main class="todos content">
+           <section class="section">
+                <div class="section-inner">
+                    <div class="section-content clearfix">
+                        <div class="todo-wrap clearfix">
+                            <div class="todo">
+                                <div class="todo-controls">
+                                    <input name="todoText" type="text" class="todo-input" placeholder="Введите сообщение">
+                                    <button name="addButton" type="button" class="todo-button" onClick="gettext()">Отправить</button>
+                                  </div>
+                                  <div class="todo-controls">
+                                  <button name="addButton" type="button" class "todo-button"> Просмотр истории сообщений </button>
+                                    </div>
+                                  <div class="todo-controls">
+                                  <button name="addButton" type="button" class "todo-button"> Удалить сообщение </button>
+                                    </div>
+                                  <div class="todo-controls">
+                                    
+                                  <button type="button" class "todo-button"> Введите Имя </button>
+                                    
+                                    <input name="todoText" type="text" class="todo-input" placeholder="Имя">
+                                    </div>
+                               
+                              <div class="todo-output-wrap">
+                                <aside class="todo-output">
+                                    <pre name="output" class="todo-output-text"></pre>
+                                </aside>
+                            </div>  
+                            </div>                            
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </main>
+    </div>
+    <footer class="footer">
+        <div class="section-inner">
+            <div class="footer-content">
+                <span class="footer-text">Chat, 2016</span>
+            </div>
+        </div>
+    </footer>
+</body>
+</html> 
