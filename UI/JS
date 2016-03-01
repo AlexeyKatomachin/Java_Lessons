@@ -1,0 +1,21 @@
+function onAddButtonClick(){
+	var todoText = document.getElementById('todoText');
+
+	addTodo(todoText.value);
+	todoText.value = '';
+	updateCounter();
+} 
+
+function onToggleItem(labelEl) {
+	if(labelEl.classList.contains('strikeout')) {
+		labelEl.classList.remove('strikeout');
+	}
+	else {
+		labelEl.classList.add('strikeout');
+	}
+	updateCounter();
+}
+
+function gettext() {
+ document.output.value=document.todoText.value;
+}
