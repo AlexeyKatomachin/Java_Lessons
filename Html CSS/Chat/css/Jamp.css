@@ -1,0 +1,61 @@
+body, pre {
+    background-color: navajowhite;
+	border:none;
+	font-weight: bolder;
+}
+
+.container {
+	display: inline-table;
+}
+
+.subItems .items .caption,  .item .caption {
+	display: inline-block;
+	padding: 5px 10px 5px 10px;
+	white-space: nowrap;
+	text-decoration: none;
+}
+
+.item .subItems{
+	display:none;
+}
+
+.mainMenu .item:hover>.caption:hover{
+	background-color:navajowhite;
+}
+
+.item:hover .item {
+	float:none;
+}
+
+.item:hover .subItems {
+	display:inline-block;
+	position:absolute;
+	background-color:navajowhite;
+}
+
+.item:hover .subItems .caption:hover {
+	background-color:navajowhite;
+	display:inline-block;
+}
+
+.main {
+	font-size: 16px;
+	width: 100%;
+}
+
+.mainMenu {
+	width:100%;
+	background-color:white;
+}
+
+.mainMenu .item .caption {
+	background-color:whitesmoke;
+	text-decoration: none;
+}
+
+.mainMenu .item {
+	float:left;
+	display:inline-block;
+	position:relative;
+}
+
